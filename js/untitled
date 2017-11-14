@@ -1,0 +1,14 @@
+
+
+CREATE TABLE catalog (id VARCHAR(28) NOT NULL,name VARCHAR(28) NOT NULL) ENGINE MyISAM;
+
+ALTER TABLE catalog ADD PRIMARY KEY(id)
+
+CREATE TABLE category (
+    catID VARCHAR(28) NOT NULL,
+    catName VARCHAR(28) NOT NULL,
+    parentCat VARCHAR(28) default NULL,
+    catalog VARCHAR(28) NOT NULL,
+    PRIMARY KEY (catID),
+    FOREIGN KEY (catalogID) REFERENCES catalog(id)
+);
