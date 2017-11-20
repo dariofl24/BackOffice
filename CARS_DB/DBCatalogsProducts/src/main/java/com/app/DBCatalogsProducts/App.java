@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.app.hibernate.service.CatalogService;
 import com.app.hibernate.srcs.Catalog;
+import com.app.hibernate.srcs.Category;
 
 public class App {
     public static void main( String[] args ) {
@@ -33,6 +34,17 @@ public class App {
 			}
 			
 		});
+    	
+    	Catalog mb=service.findById("mercedesBenz");
+    	
+    	System.out.println(mb);
+    	
+    	Category cat = new Category();
+    	
+    	cat.setCategoryId("mercedesBenz_currentModels");
+    	cat.setDescription("Merces Benz current models".getBytes());
+    	cat.setName("Merces Benz current models");
+    	
     	
     }
 }

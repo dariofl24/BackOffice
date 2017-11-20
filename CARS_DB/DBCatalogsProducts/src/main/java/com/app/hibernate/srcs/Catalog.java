@@ -1,10 +1,13 @@
 package com.app.hibernate.srcs;
 // Generated Oct 6, 2017 3:23:39 PM by Hibernate Tools 4.3.1.Final
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,10 +27,12 @@ public class Catalog  implements java.io.Serializable {
 	@Column( name = "description" )
 	@Lob
      private byte[] description;
+	
+	@OneToMany(mappedBy="catalog")
+    private Set<Category> categories;
 
     public Catalog() {
     }
-
 	
     public Catalog(String catalogId, String name) {
         this.catalogId = catalogId;
@@ -61,7 +66,15 @@ public class Catalog  implements java.io.Serializable {
         this.description = description;
     }
     
-    public String toString(){
+    public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+	public String toString(){
     	
     	StringBuffer sb= new StringBuffer();
     	

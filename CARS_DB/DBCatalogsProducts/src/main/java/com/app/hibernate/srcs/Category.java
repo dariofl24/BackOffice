@@ -3,7 +3,10 @@ package com.app.hibernate.srcs;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,26 +26,25 @@ public class Category  implements java.io.Serializable {
 	@Column(name = "description")
      private byte[] description;
 	
-	@Column(name = "Catalog_ID", nullable = false)
-     private String catalogId;
-     
 	@Column(name = "Parent_Category_ID")
      private String parentCategoryId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Catalog_ID", nullable = false)
+	private Catalog catalog;
 
     public Category() {
     }
 
 	
-    public Category(String categoryId, String name, String catalogId) {
+    public Category(String categoryId, String name) {
         this.categoryId = categoryId;
         this.name = name;
-        this.catalogId = catalogId;
     }
-    public Category(String categoryId, String name, byte[] description, String catalogId, String parentCategoryId) {
+    public Category(String categoryId, String name, byte[] description, String parentCategoryId) {
        this.categoryId = categoryId;
        this.name = name;
        this.description = description;
-       this.catalogId = catalogId;
        this.parentCategoryId = parentCategoryId;
     }
    
@@ -67,13 +69,7 @@ public class Category  implements java.io.Serializable {
     public void setDescription(byte[] description) {
         this.description = description;
     }
-    public String getCatalogId() {
-        return this.catalogId;
-    }
     
-    public void setCatalogId(String catalogId) {
-        this.catalogId = catalogId;
-    }
     public String getParentCategoryId() {
         return this.parentCategoryId;
     }
@@ -82,6 +78,13 @@ public class Category  implements java.io.Serializable {
         this.parentCategoryId = parentCategoryId;
     }
 
+	public Catalog getCatalog() {
+		return this.catalog;
+	}
+
+	public void setCatalog(Catalog catalog) {
+		this.catalog = catalog;
+	}
 
 
 
